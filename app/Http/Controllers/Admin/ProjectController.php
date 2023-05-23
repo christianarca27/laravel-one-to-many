@@ -120,7 +120,7 @@ class ProjectController extends Controller
         $validator = Validator::make(
             $formData,
             [
-                'title' => 'required|min:5',
+                'title' => 'required|unique:projects|min:5',
                 'type_id' => 'nullable|exists:types,id',
                 'date' => 'required',
                 'preview' => 'required',
@@ -129,6 +129,7 @@ class ProjectController extends Controller
             ],
             [
                 'title.required' => 'Campo obbligatorio',
+                'title.unique' => 'Titolo già presente, scegline un altro',
                 'type_id.exists' => 'Categoria non esistente',
                 'title.min' => 'Inserisci almeno 5 caratteri',
                 'date.required' => 'Campo obbligatorio',

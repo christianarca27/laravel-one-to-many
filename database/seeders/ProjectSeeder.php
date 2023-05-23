@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Type;
 use Faker\Generator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,10 +18,13 @@ class ProjectSeeder extends Seeder
      */
     public function run(Generator $generator)
     {
+        $types = Type::all();
+
         for ($i = 0; $i < 10; $i++) {
             $newProject = new Project();
 
             $newProject->title = $generator->sentence(3);
+            $newProject->type_id = $generator->randomElement($types)->id;
             $newProject->date = $generator->date();
             $newProject->preview = $generator->imageUrl();
             $newProject->description = $generator->paragraph();
