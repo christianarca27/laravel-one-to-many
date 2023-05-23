@@ -4,6 +4,8 @@
     <div class="container">
         <h1>{{ $project->title }}</h1>
 
+        <pre>{{ $project->type?->name }}</pre>
+
         <img src="{{ $project->preview }}" alt="">
 
         <p>Data di pubblicazione: {{ $project->date }}</p>
