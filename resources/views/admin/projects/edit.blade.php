@@ -86,9 +86,10 @@
                 @enderror
             </div>
 
-            <div class="input-group mb-3">
-                <button type="submit" class="btn btn-primary">Modifica</button>
-            </div>
+
+            <button type="submit" class="btn btn-primary">Modifica</button>
+
+            <a class="btn btn-secondary" href="{{ route('admin.projects.show', $project) }}">Annulla</a>
         </form>
     </div>
 @endsection

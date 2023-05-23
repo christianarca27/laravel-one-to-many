@@ -2,21 +2,37 @@
 
 @section('content')
     <div class="container">
-        <h1>Index</h1>
+        <h1>Progetti</h1>
 
-        <div class="row g-3">
-            @foreach ($projects as $project)
-                <div class="col-4">
-                    <div class="card shadow">
-                        <img src="{{ $project->preview }}" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $project->title }}</h5>
-                            <pre>{{ $project->type?->name }}</pre>
-                            <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary">Dettagli</a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+        <a class="btn btn-primary mb-3" href="{{ route('admin.projects.create') }}">Inserisci un nuovo progetto</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Titolo</th>
+                    <th scope="col">Slug</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($projects as $project)
+                    <tr>
+                        <td>{{ $project->title }}</td>
+                        <td>{{ $project->slug }}</td>
+                        <td>{{ $project->type?->name }}</td>
+                        <td>{{ $project->date }}</td>
+                        <td>{{ $project->url }}</td>
+                        <td>
+                            <a href="{{ route('admin.projects.show', $project) }}"><i class="fa-solid fa-search"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <a class="btn btn-primary mb-3" href="{{ route('admin.projects.create') }}">Inserisci un nuovo progetto</a>
     </div>
 @endsection
