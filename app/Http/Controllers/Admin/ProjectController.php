@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
-use DateTime;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -30,7 +30,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -74,7 +76,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -117,6 +121,7 @@ class ProjectController extends Controller
             $formData,
             [
                 'title' => 'required|min:5',
+                'type_id' => 'nullable|exists:types,id',
                 'date' => 'required',
                 'preview' => 'required',
                 'description' => 'required',
@@ -124,6 +129,7 @@ class ProjectController extends Controller
             ],
             [
                 'title.required' => 'Campo obbligatorio',
+                'type_id.exists' => 'Categoria non esistente',
                 'title.min' => 'Inserisci almeno 5 caratteri',
                 'date.required' => 'Campo obbligatorio',
                 'preview.required' => 'Campo obbligatorio',

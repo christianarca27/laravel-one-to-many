@@ -21,6 +21,25 @@
             </div>
 
             <div class="input-group mb-3">
+                <label class="input-group-text" for="type_id">Tipo</label>
+                <select class="form-select @error('type_id') is-invalid @enderror" name="type_id" required>
+                    <option value="" selected>Nessuno</option>
+
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}"
+                            {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>
+                            {{ $type->name }}</option>
+                    @endforeach
+                </select>
+
+                @error('type_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="input-group mb-3">
                 <label class="input-group-text" for="date">Data</label>
                 <input type="date" class="form-control @error('date') is-invalid @enderror" name="date"
                     value="{{ old('date') ?? $project->date }}" required>
