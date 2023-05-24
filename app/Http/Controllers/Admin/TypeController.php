@@ -113,7 +113,7 @@ class TypeController extends Controller
         $validator = Validator::make(
             $formData,
             [
-                'name' => 'required|unique:types',
+                'name' => 'required|unique:types,name',
                 'description' => 'required'
             ],
             [
